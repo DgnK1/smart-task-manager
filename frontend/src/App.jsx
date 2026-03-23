@@ -116,9 +116,20 @@ export default function App() {
   };
 
   const login = async ({ email, password }) => {
-    const res = await api.post("/login", { email, password });
-    localStorage.setItem("token", res.data.token);
-    setToken(res.data.token);
+    try {
+      const res = await api.post("/login", { email, password });
+      localStorage.setItem("token", res.data.token);
+      setToken(res.data.token);
+      showToast("Logged in.");
+      return true;
+    } catch (err) {
+      const message =
+        err?.response?.data?.message ||
+        err?.response?.data?.errors?.email?.[0] ||
+        "Failed to sign in. Check the API URL and CORS settings.";
+      showToast(message, "error");
+      return false;
+    }
   };
 
   const logout = async () => {

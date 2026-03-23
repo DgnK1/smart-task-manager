@@ -1,10 +1,12 @@
 <?php
 
-$allowedOrigins = array_values(array_filter([
-    env('FRONTEND_URL'),
+$frontendUrl = env('FRONTEND_URL');
+
+$allowedOrigins = array_values(array_unique(array_filter([
+    $frontendUrl ? rtrim($frontendUrl, '/') : null,
     'http://localhost:5173',
     'http://127.0.0.1:5173',
-]));
+])));
 
 return [
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
