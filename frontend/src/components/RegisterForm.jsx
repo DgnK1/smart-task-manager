@@ -22,14 +22,16 @@ export default function RegisterForm({
   };
 
   return (
-    <main className="min-h-screen bg-slate-100 p-6">
-      <form
-        onSubmit={submit}
-        className="mx-auto mt-20 max-w-md rounded bg-white p-6 shadow"
-      >
-        <h1 className="mb-4 text-xl font-bold">Create Account</h1>
+    <main className="auth-shell">
+      <form onSubmit={submit} className="auth-card">
+        <span className="section-label">New Workspace</span>
+        <h1 className="auth-title mt-4">Create account</h1>
+        <p className="auth-copy mt-3">
+          Set up your account and jump straight into planning projects and
+          tracking work.
+        </p>
         <input
-          className="mb-2 w-full rounded border p-2"
+          className="app-input mt-6"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Name"
@@ -37,11 +39,11 @@ export default function RegisterForm({
           disabled={loading}
         />
         {formErrors.name?.[0] && (
-          <p className="mb-2 text-sm text-red-600">{formErrors.name[0]}</p>
+          <p className="mt-2 text-sm text-red-600">{formErrors.name[0]}</p>
         )}
 
         <input
-          className="mb-2 w-full rounded border p-2"
+          className="app-input mt-3"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
@@ -49,11 +51,11 @@ export default function RegisterForm({
           disabled={loading}
         />
         {formErrors.email?.[0] && (
-          <p className="mb-2 text-sm text-red-600">{formErrors.email[0]}</p>
+          <p className="mt-2 text-sm text-red-600">{formErrors.email[0]}</p>
         )}
 
         <input
-          className="mb-2 w-full rounded border p-2"
+          className="app-input mt-3"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -62,11 +64,11 @@ export default function RegisterForm({
           disabled={loading}
         />
         {formErrors.password?.[0] && (
-          <p className="mb-2 text-sm text-red-600">{formErrors.password[0]}</p>
+          <p className="mt-2 text-sm text-red-600">{formErrors.password[0]}</p>
         )}
 
         <input
-          className="mb-4 w-full rounded border p-2"
+          className="app-input mt-3"
           type="password"
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
@@ -77,7 +79,7 @@ export default function RegisterForm({
 
         <button
           disabled={loading}
-          className="w-full rounded bg-emerald-600 p-2 text-white disabled:cursor-not-allowed disabled:opacity-60"
+          className="btn btn-primary mt-5 w-full disabled:cursor-not-allowed"
         >
           {loading ? "Creating account..." : "Create account"}
         </button>
@@ -86,7 +88,7 @@ export default function RegisterForm({
           type="button"
           onClick={onSwitchToLogin}
           disabled={loading}
-          className="mt-3 w-full text-sm text-slate-600 underline disabled:cursor-not-allowed disabled:opacity-60"
+          className="link-button mt-4 w-full text-sm disabled:cursor-not-allowed disabled:opacity-60"
         >
           Already have an account? Sign in
         </button>

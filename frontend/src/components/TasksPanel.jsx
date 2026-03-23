@@ -144,8 +144,15 @@ export default function TasksPanel({
   if (!selectedProject) {
     return (
       <section>
-        <h2 className="mb-3 text-xl font-semibold">Select a project</h2>
-        <div className="rounded border border-dashed border-slate-300 bg-white p-4 text-sm text-slate-600 shadow">
+        <div className="mb-5">
+          <p className="section-label">Task Board</p>
+          <h2 className="panel-heading mt-3">Select a project</h2>
+          <p className="panel-subheading mt-2">
+            Your task workflow appears here once you open a project from the
+            left side.
+          </p>
+        </div>
+        <div className="surface-note p-5 text-sm text-slate-600">
           <p className="font-medium text-slate-800">Choose a project to begin.</p>
           <p className="mt-1">
             After you select a project, you can create tasks, update their
@@ -158,21 +165,26 @@ export default function TasksPanel({
 
   return (
     <section>
-      <h2 className="mb-3 text-xl font-semibold">
-        Tasks: {selectedProject.name}
-      </h2>
+      <div className="mb-5">
+        <p className="section-label">Execution</p>
+        <h2 className="panel-heading mt-3">Tasks: {selectedProject.name}</h2>
+        <p className="panel-subheading mt-2">
+          Add, filter, edit, and review the work inside this project without
+          leaving the page.
+        </p>
+      </div>
       {loading && (
         <p className="mb-2 text-sm text-slate-500">Loading tasks...</p>
       )}
       {error && (
-        <p className="mb-2 rounded bg-red-50 p-2 text-sm text-red-700">
+        <p className="mb-3 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700">
           {error}
         </p>
       )}
 
-      <form onSubmit={submitTask} className="mb-4 rounded bg-white p-4 shadow">
+      <form onSubmit={submitTask} className="panel-card mb-5 p-5">
         <input
-          className="mb-2 w-full rounded border p-2"
+          className="app-input"
           placeholder="Task title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -180,22 +192,22 @@ export default function TasksPanel({
           required
         />
         {formErrors?.title?.[0] && (
-          <p className="mb-2 text-sm text-red-600">{formErrors.title[0]}</p>
+          <p className="mt-2 text-sm text-red-600">{formErrors.title[0]}</p>
         )}
         <textarea
-          className="mb-2 w-full rounded border p-2"
+          className="app-textarea mt-3"
           placeholder="Task description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           disabled={isCreatingTask}
         />
         {formErrors?.description?.[0] && (
-          <p className="mb-2 text-sm text-red-600">{formErrors.description[0]}</p>
+          <p className="mt-2 text-sm text-red-600">{formErrors.description[0]}</p>
         )}
         <div className="mb-2 grid grid-cols-2 gap-2">
           <input
             type="date"
-            className="rounded border p-2"
+            className="app-input"
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
             disabled={isCreatingTask}
@@ -204,7 +216,7 @@ export default function TasksPanel({
             <p className="text-sm text-red-600">{formErrors.due_date[0]}</p>
           )}
           <select
-            className="rounded border p-2"
+            className="app-select"
             value={status}
             onChange={(e) => setStatus(e.target.value)}
             disabled={isCreatingTask}
@@ -220,20 +232,17 @@ export default function TasksPanel({
           <p className="mb-2 text-sm text-red-600">{formErrors.status[0]}</p>
         )}
         <button
-          className="rounded bg-indigo-600 px-4 py-2 text-white disabled:opacity-60"
+          className="btn btn-secondary mt-4 disabled:opacity-60"
           disabled={isCreatingTask}
         >
           {isCreatingTask ? "Adding..." : "Add Task"}
         </button>
       </form>
 
-      <form
-        onSubmit={applyFilters}
-        className="mb-4 rounded bg-white p-4 shadow"
-      >
+      <form onSubmit={applyFilters} className="panel-card mb-5 p-5">
         <div className="grid grid-cols-2 gap-2">
           <select
-            className="rounded border p-2"
+            className="app-select"
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
             disabled={isFiltering}
@@ -246,7 +255,7 @@ export default function TasksPanel({
             ))}
           </select>
           <input
-            className="rounded border p-2"
+            className="app-input"
             placeholder="Search tasks"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -254,7 +263,7 @@ export default function TasksPanel({
           />
         </div>
         <button
-          className="mt-2 rounded bg-slate-700 px-4 py-2 text-white disabled:opacity-60"
+          className="btn btn-dark mt-4 disabled:opacity-60"
           disabled={isFiltering}
         >
           {isFiltering ? "Applying..." : "Apply Filters"}
@@ -263,13 +272,13 @@ export default function TasksPanel({
 
       <div className="space-y-2">
         {tasks.map((t) => (
-          <div key={t.id} className="rounded bg-white p-3 shadow">
+          <div key={t.id} className="task-card p-4">
             <div className="flex items-start justify-between gap-3">
               <div className="w-full">
                 {editingTaskId === t.id ? (
                   <div className="space-y-2">
                     <input
-                      className="w-full rounded border p-2"
+                      className="app-input"
                       value={editTitle}
                       onChange={(e) => setEditTitle(e.target.value)}
                       placeholder="Task title"
@@ -280,7 +289,7 @@ export default function TasksPanel({
                       </p>
                     )}
                     <textarea
-                      className="w-full rounded border p-2"
+                      className="app-textarea"
                       value={editDescription}
                       onChange={(e) => setEditDescription(e.target.value)}
                       placeholder="Task description"
@@ -292,7 +301,7 @@ export default function TasksPanel({
                     )}
                     <input
                       type="date"
-                      className="rounded border p-2"
+                      className="app-input"
                       value={editDueDate}
                       onChange={(e) => setEditDueDate(e.target.value)}
                     />
@@ -305,7 +314,7 @@ export default function TasksPanel({
                       <button
                         type="button"
                         onClick={() => saveEdit(t.id)}
-                        className="rounded bg-emerald-600 px-2 py-1 text-sm text-white disabled:opacity-60"
+                        className="btn btn-primary px-4 py-2 text-sm disabled:opacity-60"
                         disabled={savingTaskId !== null}
                       >
                         {savingTaskId === t.id ? "Saving..." : "Save"}
@@ -313,7 +322,7 @@ export default function TasksPanel({
                       <button
                         type="button"
                         onClick={cancelEdit}
-                        className="rounded bg-slate-500 px-2 py-1 text-sm text-white disabled:opacity-60"
+                        className="btn btn-muted px-4 py-2 text-sm disabled:opacity-60"
                         disabled={savingTaskId !== null}
                       >
                         Cancel
@@ -322,9 +331,13 @@ export default function TasksPanel({
                   </div>
                 ) : (
                   <>
-                    <h4 className="font-semibold">{t.title}</h4>
-                    <p className="text-sm text-slate-600">{t.description}</p>
-                    <p className="text-xs text-slate-500">
+                    <h4 className="text-lg font-semibold text-slate-900">
+                      {t.title}
+                    </h4>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">
+                      {t.description}
+                    </p>
+                    <p className="mt-2 text-xs font-medium uppercase tracking-[0.12em] text-slate-400">
                       Due:{" "}
                       {t.due_date ? String(t.due_date).slice(0, 10) : "N/A"}
                     </p>
@@ -334,7 +347,7 @@ export default function TasksPanel({
 
               <div className="flex items-center gap-2">
                 <select
-                  className="rounded border p-1 text-sm"
+                  className="app-select max-w-[8.5rem] py-2 text-sm"
                   value={t.status}
                   disabled={
                     statusUpdatingTaskId !== null ||
@@ -365,7 +378,7 @@ export default function TasksPanel({
                   <button
                     type="button"
                     onClick={() => startEdit(t)}
-                    className="rounded bg-amber-500 px-2 py-1 text-sm text-white disabled:opacity-60"
+                    className="btn btn-warning px-4 py-2 text-sm disabled:opacity-60"
                     disabled={
                       statusUpdatingTaskId !== null ||
                       deletingTaskId !== null ||
@@ -379,7 +392,7 @@ export default function TasksPanel({
                 <button
                   type="button"
                   onClick={() => setTaskToDelete(t)}
-                  className="rounded bg-red-600 px-2 py-1 text-sm text-white disabled:opacity-60"
+                  className="btn btn-danger px-4 py-2 text-sm disabled:opacity-60"
                   disabled={
                     statusUpdatingTaskId !== null ||
                     deletingTaskId !== null ||
@@ -394,7 +407,7 @@ export default function TasksPanel({
         ))}
       </div>
       {!loading && tasks.length === 0 && (
-        <div className="mt-4 rounded border border-dashed border-slate-300 bg-white p-4 text-sm text-slate-600 shadow">
+        <div className="surface-note mt-4 p-5 text-sm text-slate-600">
           <p className="font-medium text-slate-800">
             No tasks found for this project.
           </p>
@@ -404,7 +417,7 @@ export default function TasksPanel({
           </p>
         </div>
       )}
-      <div className="mt-3 flex items-center justify-between rounded bg-white p-3 shadow">
+      <div className="panel-card mt-4 flex items-center justify-between px-4 py-3">
         <p className="text-sm text-slate-600">
           Showing {pagination?.from ?? 0}-{pagination?.to ?? 0} of{" "}
           {pagination?.total ?? 0}
@@ -412,7 +425,7 @@ export default function TasksPanel({
         <div className="flex items-center gap-2">
           <button
             type="button"
-            className="rounded bg-slate-200 px-3 py-1 text-sm disabled:opacity-50"
+            className="btn btn-muted px-4 py-2 text-sm disabled:opacity-50"
             disabled={safeCurrentPage <= 1 || isPaginating}
             onClick={async () => {
               setIsPaginating(true);
@@ -433,7 +446,7 @@ export default function TasksPanel({
           </span>
           <button
             type="button"
-            className="rounded bg-slate-200 px-3 py-1 text-sm disabled:opacity-50"
+            className="btn btn-muted px-4 py-2 text-sm disabled:opacity-50"
             disabled={
               safeCurrentPage >= (pagination?.lastPage ?? 1) || isPaginating
             }

@@ -340,7 +340,7 @@ export default function App() {
   const toastNode = toast.message ? (
     <div className="fixed right-4 top-4 z-50">
       <div
-        className={`rounded px-4 py-2 text-sm text-white shadow ${
+        className={`toast-card text-sm font-medium text-white ${
           toast.type === "error" ? "bg-red-600" : "bg-emerald-600"
         }`}
       >
@@ -380,55 +380,92 @@ export default function App() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-100 p-6">
+    <main className="app-page">
       {toastNode}
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-6 flex items-center justify-between">
-          <h1 className="text-2xl font-bold">Smart Task Manager</h1>
-          <div className="flex items-center gap-3">
-            {currentUser && (
-              <div className="rounded bg-white px-3 py-2 text-sm text-slate-700 shadow">
-                Signed in as{" "}
-                <span className="font-medium">
-                  {currentUser.name || currentUser.email}
-                </span>
+      <div className="app-shell">
+        <section className="hero-card px-6 py-7 md:px-8 md:py-8">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+            <div className="max-w-2xl">
+              <span className="section-label">Workspace</span>
+              <h1 className="hero-title mt-4">Smart Task Manager</h1>
+              <p className="hero-copy mt-4">
+                Keep projects, tasks, and status updates in one calm workspace.
+                Built for quick planning, cleaner handoffs, and less friction
+                when you just need to get work moving.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3 lg:min-w-[16rem] lg:items-end">
+              <div className="stat-pill text-sm text-slate-600">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+                  Signed in
+                </p>
+                <p className="mt-2 text-base font-semibold text-slate-800">
+                  {currentUser?.name || currentUser?.email || "Authenticated"}
+                </p>
               </div>
-            )}
-            <button
-              onClick={logout}
-              className="rounded bg-slate-800 px-4 py-2 text-white"
-            >
-              Logout
-            </button>
+              <div className="stat-pill text-sm text-slate-600">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+                  Projects
+                </p>
+                <p className="mt-2 text-2xl font-bold text-slate-900">
+                  {projects.length}
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
-          <ProjectsPanel
-            projects={projects}
-            selectedProject={selectedProject}
-            onCreateProject={createProject}
-            onUpdateProject={updateProject}
-            onDeleteProject={deleteProject}
-            onSelectProject={selectProject}
-            loading={projectsLoading}
-            error={projectsError}
-            formErrors={projectFormErrors}
-          />
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200/70 pt-5">
+            <p className="text-sm text-slate-500">
+              Organize work, assign momentum, and keep progress visible.
+            </p>
 
-          <TasksPanel
-            selectedProject={selectedProject}
-            tasks={tasks}
-            onCreateTask={createTask}
-            onUpdateTaskStatus={updateTaskStatus}
-            onUpdateTask={updateTask}
-            onDeleteTask={deleteTask}
-            onLoadTasks={loadTasks}
-            loading={tasksLoading}
-            error={tasksError}
-            pagination={taskPagination}
-            formErrors={taskFormErrors}
-          />
+            <div className="flex items-center gap-3">
+              {currentUser && (
+                <div className="stat-pill px-4 py-3 text-sm text-slate-700">
+                  Signed in as{" "}
+                  <span className="font-semibold text-slate-900">
+                    {currentUser.name || currentUser.email}
+                  </span>
+                </div>
+              )}
+              <button onClick={logout} className="btn btn-dark">
+                Logout
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <div className="mt-8 grid gap-6 xl:grid-cols-[1.02fr_1fr]">
+          <div className="panel-card p-5 md:p-6">
+            <ProjectsPanel
+              projects={projects}
+              selectedProject={selectedProject}
+              onCreateProject={createProject}
+              onUpdateProject={updateProject}
+              onDeleteProject={deleteProject}
+              onSelectProject={selectProject}
+              loading={projectsLoading}
+              error={projectsError}
+              formErrors={projectFormErrors}
+            />
+          </div>
+
+          <div className="panel-card p-5 md:p-6">
+            <TasksPanel
+              selectedProject={selectedProject}
+              tasks={tasks}
+              onCreateTask={createTask}
+              onUpdateTaskStatus={updateTaskStatus}
+              onUpdateTask={updateTask}
+              onDeleteTask={deleteTask}
+              onLoadTasks={loadTasks}
+              loading={tasksLoading}
+              error={tasksError}
+              pagination={taskPagination}
+              formErrors={taskFormErrors}
+            />
+          </div>
         </div>
       </div>
     </main>

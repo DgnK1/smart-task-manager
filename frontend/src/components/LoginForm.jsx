@@ -14,11 +14,16 @@ export default function LoginForm({
   };
 
   return (
-    <main className="min-h-screen bg-slate-100 p-6">
-      <form onSubmit={submit} className="mx-auto mt-20 max-w-md rounded bg-white p-6 shadow">
-        <h1 className="mb-4 text-xl font-bold">Login</h1>
+    <main className="auth-shell">
+      <form onSubmit={submit} className="auth-card">
+        <span className="section-label">Welcome Back</span>
+        <h1 className="auth-title mt-4">Sign in</h1>
+        <p className="auth-copy mt-3">
+          Pick up where you left off. Your projects, tasks, and status updates
+          are ready when you are.
+        </p>
         <input
-          className="mb-3 w-full rounded border p-2"
+          className="app-input mt-6"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
@@ -26,7 +31,7 @@ export default function LoginForm({
           disabled={loading}
         />
         <input
-          className="mb-3 w-full rounded border p-2"
+          className="app-input mt-3"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -36,7 +41,7 @@ export default function LoginForm({
         />
         <button
           disabled={loading}
-          className="w-full rounded bg-blue-600 p-2 text-white disabled:cursor-not-allowed disabled:opacity-60"
+          className="btn btn-secondary mt-5 w-full disabled:cursor-not-allowed"
         >
           {loading ? "Signing in..." : "Sign in"}
         </button>
@@ -44,7 +49,7 @@ export default function LoginForm({
           type="button"
           onClick={onSwitchToRegister}
           disabled={loading}
-          className="mt-3 w-full text-sm text-slate-600 underline disabled:cursor-not-allowed disabled:opacity-60"
+          className="link-button mt-4 w-full text-sm disabled:cursor-not-allowed disabled:opacity-60"
         >
           Need an account? Create one
         </button>

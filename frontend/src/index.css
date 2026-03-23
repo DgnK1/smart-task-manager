@@ -1,1 +1,331 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap");
 @import "tailwindcss";
+
+:root {
+  color: #0f172a;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(244, 114, 182, 0.12), transparent 24rem),
+    radial-gradient(circle at top right, rgba(45, 212, 191, 0.14), transparent 20rem),
+    linear-gradient(180deg, #f8fafc 0%, #eef2ff 42%, #f8fafc 100%);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: #0f172a;
+  background:
+    radial-gradient(circle at top left, rgba(244, 114, 182, 0.12), transparent 24rem),
+    radial-gradient(circle at top right, rgba(45, 212, 191, 0.14), transparent 20rem),
+    linear-gradient(180deg, #f8fafc 0%, #eef2ff 42%, #f8fafc 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.app-page {
+  min-height: 100vh;
+  padding: 2rem 1rem 3rem;
+}
+
+.app-shell {
+  margin: 0 auto;
+  max-width: 74rem;
+}
+
+.hero-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 2rem;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+}
+
+.hero-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -6rem -6rem auto;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.14), transparent 62%);
+  pointer-events: none;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.06);
+  padding: 0.35rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #475569;
+}
+
+.hero-title {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(2.5rem, 5vw, 4.4rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: #0f172a;
+}
+
+.hero-copy {
+  max-width: 42rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #475569;
+}
+
+.stat-pill {
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 1.2rem;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.9rem 1rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.panel-card {
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  border-radius: 1.75rem;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.07);
+}
+
+.panel-heading {
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #0f172a;
+}
+
+.panel-subheading {
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.app-input,
+.app-textarea,
+.app-select {
+  width: 100%;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.94);
+  color: #0f172a;
+  padding: 0.95rem 1rem;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.03);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.app-textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.app-input:focus,
+.app-textarea:focus,
+.app-select:focus {
+  outline: none;
+  border-color: rgba(14, 165, 233, 0.55);
+  box-shadow:
+    0 0 0 4px rgba(125, 211, 252, 0.22),
+    inset 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+.app-input:disabled,
+.app-textarea:disabled,
+.app-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+  background: rgba(241, 245, 249, 0.92);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  padding: 0.75rem 1.15rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    opacity 160ms ease,
+    background-color 160ms ease;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0f766e, #14b8a6);
+  box-shadow: 0 14px 30px rgba(20, 184, 166, 0.24);
+  color: white;
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.24);
+  color: white;
+}
+
+.btn-dark {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.2);
+  color: white;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  box-shadow: 0 14px 30px rgba(239, 68, 68, 0.22);
+  color: white;
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, #ea580c, #f59e0b);
+  box-shadow: 0 14px 30px rgba(245, 158, 11, 0.2);
+  color: white;
+}
+
+.btn-muted {
+  border-color: rgba(148, 163, 184, 0.3);
+  background: rgba(255, 255, 255, 0.88);
+  color: #334155;
+}
+
+.link-button {
+  color: #475569;
+  text-decoration: underline;
+  text-decoration-color: rgba(100, 116, 139, 0.4);
+  text-underline-offset: 0.25rem;
+}
+
+.surface-note {
+  border: 1px dashed rgba(148, 163, 184, 0.38);
+  border-radius: 1.3rem;
+  background: rgba(248, 250, 252, 0.82);
+}
+
+.task-card,
+.project-card {
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  border-radius: 1.4rem;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease;
+}
+
+.task-card:hover,
+.project-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+}
+
+.project-card-active {
+  border-color: rgba(56, 189, 248, 0.75);
+  background:
+    linear-gradient(180deg, rgba(240, 249, 255, 0.95), rgba(255, 255, 255, 0.9));
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.14),
+    0 18px 46px rgba(14, 165, 233, 0.12);
+}
+
+.auth-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 30rem;
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  border-radius: 2rem;
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(18px);
+  padding: 2rem;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.1);
+}
+
+.auth-title {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 2.4rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #0f172a;
+}
+
+.auth-copy {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #64748b;
+}
+
+.modal-backdrop {
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(8px);
+}
+
+.modal-card {
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  border-radius: 1.6rem;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 1.7rem;
+  box-shadow: 0 28px 90px rgba(15, 23, 42, 0.16);
+}
+
+.toast-card {
+  border-radius: 9999px;
+  padding: 0.8rem 1.1rem;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+}
+
+@media (max-width: 768px) {
+  .app-page {
+    padding: 1rem 0.8rem 2rem;
+  }
+
+  .hero-title {
+    font-size: 2.75rem;
+  }
+
+  .auth-card {
+    padding: 1.4rem;
+  }
+}
