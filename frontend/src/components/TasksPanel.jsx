@@ -16,6 +16,23 @@ const STATUS_STYLES = {
 const getStatusLabel = (value) =>
   STATUS_OPTIONS.find((option) => option.value === value)?.label ?? value;
 
+const formatDueDate = (value) => {
+  if (!value) return "N/A";
+
+  const normalized = String(value).slice(0, 10);
+  const parsedDate = new Date(`${normalized}T00:00:00`);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    return normalized;
+  }
+
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(parsedDate);
+};
+
 export default function TasksPanel({
   selectedProject,
   tasks,
@@ -352,8 +369,7 @@ export default function TasksPanel({
                     </p>
                     <div className="task-meta-row mt-3">
                       <span className="text-xs font-medium uppercase tracking-[0.12em] text-slate-400">
-                        Due:{" "}
-                        {t.due_date ? String(t.due_date).slice(0, 10) : "N/A"}
+                        Due: {formatDueDate(t.due_date)}
                       </span>
                       <span className={STATUS_STYLES[t.status] ?? "status-chip"}>
                         {getStatusLabel(t.status)}
