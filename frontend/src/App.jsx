@@ -436,7 +436,7 @@ export default function App() {
           </div>
         </section>
 
-        <div className="mt-8 grid gap-6 xl:grid-cols-[1.02fr_1fr]">
+        <div className="mt-8 grid items-start gap-6 xl:grid-cols-[1.02fr_1fr]">
           <div className="panel-card p-5 md:p-6">
             <ProjectsPanel
               projects={projects}

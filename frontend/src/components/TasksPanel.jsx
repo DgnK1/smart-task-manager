@@ -1,7 +1,20 @@
 import { useState } from "react";
 import ConfirmModal from "./ConfirmModal";
 
-const STATUS_OPTIONS = ["todo", "in_progress", "done"];
+const STATUS_OPTIONS = [
+  { value: "todo", label: "To do" },
+  { value: "in_progress", label: "In Progress" },
+  { value: "done", label: "Done" },
+];
+
+const STATUS_STYLES = {
+  todo: "status-chip status-chip-todo",
+  in_progress: "status-chip status-chip-in-progress",
+  done: "status-chip status-chip-done",
+};
+
+const getStatusLabel = (value) =>
+  STATUS_OPTIONS.find((option) => option.value === value)?.label ?? value;
 
 export default function TasksPanel({
   selectedProject,
@@ -221,9 +234,9 @@ export default function TasksPanel({
             onChange={(e) => setStatus(e.target.value)}
             disabled={isCreatingTask}
           >
-            {STATUS_OPTIONS.map((s) => (
-              <option key={s} value={s}>
-                {s}
+            {STATUS_OPTIONS.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
               </option>
             ))}
           </select>
@@ -248,9 +261,9 @@ export default function TasksPanel({
             disabled={isFiltering}
           >
             <option value="">All statuses</option>
-            {STATUS_OPTIONS.map((s) => (
-              <option key={s} value={s}>
-                {s}
+            {STATUS_OPTIONS.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
               </option>
             ))}
           </select>
@@ -273,7 +286,7 @@ export default function TasksPanel({
       <div className="space-y-2">
         {tasks.map((t) => (
           <div key={t.id} className="task-card p-4">
-            <div className="flex items-start justify-between gap-3">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="w-full">
                 {editingTaskId === t.id ? (
                   <div className="space-y-2">
@@ -337,15 +350,20 @@ export default function TasksPanel({
                     <p className="mt-2 text-sm leading-6 text-slate-600">
                       {t.description}
                     </p>
-                    <p className="mt-2 text-xs font-medium uppercase tracking-[0.12em] text-slate-400">
-                      Due:{" "}
-                      {t.due_date ? String(t.due_date).slice(0, 10) : "N/A"}
-                    </p>
+                    <div className="task-meta-row mt-3">
+                      <span className="text-xs font-medium uppercase tracking-[0.12em] text-slate-400">
+                        Due:{" "}
+                        {t.due_date ? String(t.due_date).slice(0, 10) : "N/A"}
+                      </span>
+                      <span className={STATUS_STYLES[t.status] ?? "status-chip"}>
+                        {getStatusLabel(t.status)}
+                      </span>
+                    </div>
                   </>
                 )}
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="task-actions">
                 <select
                   className="app-select max-w-[8.5rem] py-2 text-sm"
                   value={t.status}
@@ -367,9 +385,9 @@ export default function TasksPanel({
                     }
                   }}
                 >
-                  {STATUS_OPTIONS.map((s) => (
-                    <option key={s} value={s}>
-                      {s}
+                  {STATUS_OPTIONS.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
                     </option>
                   ))}
                 </select>

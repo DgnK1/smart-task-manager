@@ -256,12 +256,53 @@ select {
 }
 
 .project-card-active {
-  border-color: rgba(56, 189, 248, 0.75);
+  border-color: rgba(45, 212, 191, 0.4);
   background:
-    linear-gradient(180deg, rgba(240, 249, 255, 0.95), rgba(255, 255, 255, 0.9));
+    linear-gradient(180deg, rgba(240, 253, 250, 0.92), rgba(255, 255, 255, 0.9));
   box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.14),
-    0 18px 46px rgba(14, 165, 233, 0.12);
+    0 0 0 1px rgba(45, 212, 191, 0.08),
+    0 18px 46px rgba(15, 23, 42, 0.07);
+}
+
+.task-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.task-actions {
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.status-chip-todo {
+  background: rgba(59, 130, 246, 0.08);
+  color: #1d4ed8;
+}
+
+.status-chip-in-progress {
+  background: rgba(245, 158, 11, 0.12);
+  color: #b45309;
+}
+
+.status-chip-done {
+  background: rgba(16, 185, 129, 0.12);
+  color: #047857;
 }
 
 .auth-shell {

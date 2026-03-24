@@ -220,6 +220,9 @@ export default function ProjectsPanel({
                     className="mb-3 w-full text-left"
                     disabled={isRowBusy}
                   >
+                    {selectedProject?.id === p.id && (
+                      <span className="section-label mb-3">Active project</span>
+                    )}
                     <h3 className="text-lg font-semibold text-slate-900">
                       {p.name}
                     </h3>
